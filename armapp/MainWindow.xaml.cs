@@ -154,7 +154,7 @@ namespace armapp
                 MessageBox.Show("Add a Base URL and subscription before adding this resource", "Invalid Base URL", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            urlBox.Text += "resourceGroups";
+            urlBox.Text += "resourceGroups?api-version=" + BASEAPI;
         }
 
         /// <summary>
@@ -169,17 +169,18 @@ namespace armapp
                 MessageBox.Show("Add a Base URL and subscription before adding this resource", "Invalid Base URL", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (!urlBox.Text.Contains("/resourceGroups/"))
-            {
-                MessageBox.Show("Add resourceGroups/<your resource group> to the base URL", "Invalid resource group", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
             // remove any existing API version
             if (urlBox.Text.Contains("?api-version"))
             {
                 int removeIdx = urlBox.Text.IndexOf('?');
                 urlBox.Text = urlBox.Text.Remove(removeIdx);
             }
+            if (!urlBox.Text.Contains("/resourceGroups/"))
+            {
+                MessageBox.Show("Add resourceGroups/<your resource group> to the base URL", "Invalid resource group", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             // make sure there is a forward slash separator
             if (!urlBox.Text.EndsWith("/"))
             {
@@ -242,6 +243,7 @@ namespace armapp
                 Properties.Settings.Default.subscriptionID = subscriptionId;
             }
             Properties.Settings.Default.Save();
+            MessageBox.Show("Application settings saved.", "Settings saved", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
