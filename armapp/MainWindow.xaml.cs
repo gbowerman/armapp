@@ -18,8 +18,7 @@ namespace armapp
     /// </summary>
     public partial class MainWindow : Window
     {
-        const string BASEAPI = "2015-01-01"; // API version for resource group calls
-        const string VMSSAPI = "2015-06-15"; // API version for VM Scale Set calls
+        const string BASEAPI = "2016-06-30"; // API version for resource group calls
         const string ARM_ENDPOINT = "https://management.azure.com/";
 
         string tenantId = null;
@@ -186,7 +185,7 @@ namespace armapp
             {
                 urlBox.Text += "/";
             }
-            urlBox.Text += "providers/Microsoft.Compute/virtualMachineScaleSets?api-version=" + VMSSAPI;
+            urlBox.Text += "providers/Microsoft.Compute/virtualMachineScaleSets?api-version=" + BASEAPI;
         }
 
         /// <summary>
